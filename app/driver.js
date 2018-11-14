@@ -19,7 +19,8 @@ var TodoList = Marionette.CompositeView.extend({
 	ui: {
 		assignee: '#id_assignee',
 		form: 'form',
-		text: '#id_text'
+		text: '#id_text',
+		validationErrors: '#todoValidationErrors'
 	},
 
 	triggers: {
@@ -31,14 +32,23 @@ var TodoList = Marionette.CompositeView.extend({
 	},
 
 	onAddTodoItem: function() {
+		var self = this;
+
 		this.model.set({
 			assignee: this.ui.assignee.val(),
 			text: this.ui.text.val()
 		})
-		
+
+		this.ui.validationErrors.empty();
+
 		if(this.model.isValid()) {
 			var items = this.model.pick('assignee', 'text');
 			this.collection.add(items);
+		} else {
+			var obj = this.model.validationError;
+			for(key in obj) {
+				self.ui.validationErrors.append('<p>' + obj[key].substr(0,1).toUpperCase() + obj[key].substr(1)  + '.</p>');
+			}
 		}
 	},
 
