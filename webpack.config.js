@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
 	mode: 'development',
@@ -23,7 +24,7 @@ module.exports = {
 	},
 
 	output: {
-		path: __dirname + '/static/js',
+		path: path.resolve(__dirname + '/static/js'),
 		filename: 'bundle.js'
 	},
 
