@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 
 module.exports = {
+	mode: 'development',
+
 	entry: './app/driver.js',
 
 	externals: {
@@ -12,6 +14,10 @@ module.exports = {
 			{
 				test: /\.html$/,
 				use: 'underscore-template-loader'
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
 			}
 		]
 	},

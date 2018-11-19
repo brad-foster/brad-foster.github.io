@@ -2,47 +2,50 @@
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
-var ToDoModel = require('./models/todo');
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-var ToDo = Marionette.LayoutView.extend({
+var PostModel = require('./models/post');
+
+var Post = Marionette.LayoutView.extend({
 	tagName: 'li',
-	template: require('./templates/todoitem.html')
+	template: require('./templates/post.html')
 });
 
-var TodoList = Marionette.CompositeView.extend({
+var PostContainer = Marionette.CompositeView.extend({
 	el: '#app-hook',
-	template: require('./templates/todolist.html'),
+	template: require('./templates/postContainer.html'),
 
-	childView: ToDo,
+	childView: Post,
 	childViewContainer: 'ul',
 
 	ui: {
-		assignee: '#id_assignee',
 		form: 'form',
-		text: '#id_text',
-		validationErrors: '#todoValidationErrors'
+		postTitle: '#postTitle',
+		postBody: '#postBody',
+		validationErrors: '#postValidationErrors'
 	},
 
 	triggers: {
-		'submit @ui.form': 'add:todo:item'
+		'submit @ui.form': 'add:post'
 	},
 
 	collectionEvents: {
-		add: 'itemAdded'
+		add: 'postAdded'
 	},
 
-	onAddTodoItem: function() {
+	onAddPost: function() {
 		var self = this;
 
 		this.model.set({
-			assignee: this.ui.assignee.val(),
-			text: this.ui.text.val()
+			postTitle: this.ui.postTitle.val(),
+			postBody: this.ui.postBody.val()
 		})
 
 		this.ui.validationErrors.empty();
 
 		if(this.model.isValid()) {
-			var items = this.model.pick('assignee', 'text');
+			var items = this.model.pick('postTitle', 'postBody');
 			this.collection.add(items);
 		} else {
 			var obj = this.model.validationError;
@@ -52,24 +55,24 @@ var TodoList = Marionette.CompositeView.extend({
 		}
 	},
 
-	itemAdded: function() {
+	postAdded: function() {
 		this.model.set({
-			assignee: '',
-			text: ''
+			postTitle: '',
+			postBody: ''
 		});
 
-		this.ui.assignee.val('');
-		this.ui.text.val('');
+		this.ui.postTitle.val('');
+		this.ui.postBody.val('');
 	}
 });
 
-var todo = new TodoList({
+var postContainer = new PostContainer({
 	collection: new Backbone.Collection([
-		{assignee: 'Brad', text: 'Write a book about Marionette'},
-		{assignee: 'Foster', text: 'Do some coding'}
+		{postTitle: 'Brad Foster', postBody: 'Creating this site pt. 1'},
+		{postTitle: 'Bradley Foster', postBody: 'Creating this site pt. 2'}
 	]),
 
-	model: new ToDoModel
+	model: new PostModel
 });
 
-todo.render();
+postContainer.render();
