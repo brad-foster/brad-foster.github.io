@@ -65,8 +65,8 @@ var TodoList = Marionette.CompositeView.extend({
 
 var todo = new TodoList({
 	collection: new Backbone.Collection([
-		{assignee: 'Scott', text: 'Write a book about Marionette'},
-		{assignee: 'Andrew', text: 'Do some coding'}
+		{assignee: 'Brad', text: 'Write a book about Marionette'},
+		{assignee: 'Foster', text: 'Do some coding'}
 	]),
 
 	model: new ToDoModel
