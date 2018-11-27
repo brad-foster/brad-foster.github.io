@@ -2,12 +2,12 @@
 var Marionette = require('backbone.marionette');
 
 var Post = Marionette.LayoutView.extend({
-	tagName: 'li',
+	tagName: 'div',
 	template: require('../templates/post.html')
 });
 
 var PostContainer = Marionette.CollectionView.extend({
-  tagName: 'ul',
+  tagName: 'div',
   childView: Post
 });
 

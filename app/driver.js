@@ -1,22 +1,21 @@
 
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+var PostContentUtil = require('./util/postContentUtil');
 
 var PostContainer = require('./views/postContainer');
 var PostModel = require('./models/post');
 
-var initialData = [
-	{postTitle: 'Brad Foster', postBody: 'Creating this site pt. 1'},
-	{postTitle: 'Bradley Foster', postBody: 'Creating this site pt. 2'}
-];
-
 var app = new Marionette.Application({
 	onStart: function(options) {
+		var initialData = PostContentUtil.getPostObjects();
+
 		var postContainer = new PostContainer({
-			collection: new Backbone.Collection(options.intitialData),
+			collection: new Backbone.Collection(initialData),
 			model: new PostModel()
 		});
 		postContainer.render();
@@ -24,4 +23,4 @@ var app = new Marionette.Application({
 	}
 });
 
-app.start({initialData: initialData});
+app.start();
