@@ -4,7 +4,7 @@ var Marionette = require('backbone.marionette');
 var PostForm = require('./postForm');
 var PostList = require('./postList');
 
-var PostContainer = Marionette.LayoutView.extend({
+var PostContainer = Marionette.View.extend({
 	el: '#app-hook',
 
 	template: require('../templates/postContainer.html'),

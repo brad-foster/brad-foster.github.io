@@ -1,7 +1,7 @@
 
 var Marionette = require('backbone.marionette');
 
-var Post = Marionette.LayoutView.extend({
+var Post = Marionette.View.extend({
 	tagName: 'div',
 	template: require('../templates/post.html')
 });
