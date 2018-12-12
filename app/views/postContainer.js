@@ -18,6 +18,10 @@ var PostContainer = Marionette.View.extend({
 		list: '.post-list'
 	},
 
+	childViewEvents: {
+		'add:post' : 'addPost'
+	},
+
 	collectionEvents: {
 		add: 'postAdded'
 	},
@@ -30,22 +34,24 @@ var PostContainer = Marionette.View.extend({
 		this.showChildView('list', postList);
 	},
 
-	onChildviewAddPost: function(child) {
+	addPost: function(child) {
 		var self = this;
 
 		this.ui.validationErrors.empty();
 
 		this.model.set({
 			postTitle: child.ui.postTitle.val(),
-			postBody: child.ui.postBody.val()
+			postBody: child.ui.postBody.val(),
+			postAuthor: 'Brad Foster',
+			postDate: new Date()
 		}, {validate: true});
 
 		if(this.model.validationError) {
 			for(err in this.model.validationError) {
-				self.ui.validationErrors.append('<p style="color: red; font-size: 12px; margin: 5px 0px 5px 10px">' + this.model.validationError[err] + '</p>');
+				self.ui.validationErrors.append('<p style="color: red; font-size: 12px; margin: 5px 0px 5px 10px">' + self.model.validationError[err] + '</p>');
 			}
 		} else {
-			var postData = this.model.pick('postTitle', 'postBody');
+			var postData = this.model.pick('postTitle', 'postBody', 'postAuthor', 'postDate');
 			this.collection.add(postData);
 		}
 	},

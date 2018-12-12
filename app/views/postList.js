@@ -3,12 +3,26 @@ var Marionette = require('backbone.marionette');
 
 var Post = Marionette.View.extend({
 	tagName: 'div',
-	template: require('../templates/post.html')
+
+	template: require('../templates/post.html'),
+
+	triggers: {
+    'click #deletePost': 'delete:post'
+  }
 });
 
-var PostContainer = Marionette.CollectionView.extend({
+var PostList = Marionette.CollectionView.extend({
   tagName: 'div',
-  childView: Post
+
+  childView: Post,
+
+	childViewEvents: {
+		'delete:post' : 'deletePost'
+	},
+
+	deletePost : function(child) {
+		this.collection.remove(child.model);
+	}
 });
 
-module.exports = PostContainer;
+module.exports = PostList;
