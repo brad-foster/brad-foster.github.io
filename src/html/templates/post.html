@@ -2,8 +2,9 @@
 <div class="card subcontent-spacing">
   <div class="card-header">
     <%- postDate %>
+    <button class="btn btn-danger post-action-btn" id="deletePost">Delete</button>
+    <button class="btn btn-warning post-action-btn" id="editPost">Edit</button>
   </div>
-  <button class="btn btn-error" id="deletePost">Delete Post</button>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
       <p><%- postBody %></p>

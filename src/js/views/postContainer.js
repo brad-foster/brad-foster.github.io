@@ -7,7 +7,7 @@ var PostList = require('./postList');
 var PostContainer = Marionette.View.extend({
 	el: '#app-hook',
 
-	template: require('../templates/postContainer.html'),
+	template: require('../../html/templates/postContainer.html'),
 
 	ui: {
 		validationErrors: '#postValidationErrors'

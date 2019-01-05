@@ -4,7 +4,7 @@ var Marionette = require('backbone.marionette');
 var Post = Marionette.View.extend({
 	tagName: 'div',
 
-	template: require('../templates/post.html'),
+	template: require('../../html/templates/post.html'),
 
 	triggers: {
     'click #deletePost': 'delete:post'

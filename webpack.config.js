@@ -4,28 +4,18 @@ var path = require('path');
 module.exports = {
 	mode: 'development',
 
-	entry: './app/driver.js',
-
-	externals: {
-		'jquery' : '$'
-	},
+	entry: './src/index.js',
 
 	module: {
 		rules: [
-			{
-				test: /\.html$/,
-				use: 'underscore-template-loader'
-			},
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			}
+			{test: /\.html$/, use: 'underscore-template-loader'},
+			{test: /\.css$/, use: ['style-loader', 'css-loader']}
 		]
 	},
 
 	output: {
-		path: path.resolve(__dirname + '/static/js'),
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		path: path.resolve(__dirname + 'dist')
 	},
 
 	plugins: [
@@ -43,7 +33,7 @@ module.exports = {
 	},
 
 	devServer: {
-    contentBase: './static/js',
+    contentBase: 'dist',
     compress: true,
     port: 8080
   }
