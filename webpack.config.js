@@ -38,7 +38,13 @@ module.exports = {
 	    modules: [__dirname + '/node_modules', __dirname + '/app']
 	},
 
-  	resolveLoader: {
-    	modules: [__dirname + '/node_modules']
-  	}
+	resolveLoader: {
+  	modules: [__dirname + '/node_modules']
+	},
+
+	devServer: {
+    contentBase: './static/js',
+    compress: true,
+    port: 8080
+  }
 };
