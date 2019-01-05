@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './css/style.css';
 
+var $ = require('jquery');
+
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 
@@ -22,6 +24,10 @@ var app = new Marionette.Application({
 		});
 		postContainer.render();
 		postContainer.triggerMethod('show');
+
+		if(PostContentUtil.isAdminEnabled()) {
+			$('.admin-utils').hide();
+		}
 	}
 });
 

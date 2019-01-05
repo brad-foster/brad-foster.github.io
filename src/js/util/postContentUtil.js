@@ -1,5 +1,9 @@
 
 var Util = {
+  isAdminEnabled : function() {
+    return false;
+  },
+
   getPostObjects : function() {
     return [
 			{
